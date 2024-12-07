@@ -87,9 +87,10 @@ BCp.processOneFileForTarget = function (inputFile, source) {
       // Start with a much simpler set of Babel presets and plugins if
       // we're compiling for Node 8.
       features.nodeMajorVersion = parseInt(process.versions.node, 10);
-    } else if (arch === "web.browser") {
-      features.modernBrowsers = true;
     }
+
+    // Always assume modern browsers to prevent Babel from transpiling classes into functions in Cordova.
+    features.modernBrowsers = true;
 
     if (! features.hasOwnProperty("jscript")) {
       // Perform some additional transformations to improve compatibility
